@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Bob / Booby 🐱</title>
+  <title>Bob aka Booby 🐱</title>
 
   <style>
     body {
@@ -14,6 +14,18 @@
       color: #102a43;
       text-align: center;
       overflow-x: hidden;
+    }
+
+    .corner-brand {
+      position: fixed;
+      top: 14px;
+      left: 16px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #0b2545;
+      opacity: 0.75;
+      z-index: 1000;
+      letter-spacing: 0.5px;
     }
 
     .section {
@@ -141,23 +153,21 @@
 
 <body>
 
+  <div class="corner-brand">Bobert ™ ( vibe coding purpose only )</div>
+
   <div class="section">
     <div class="card">
       <div class="paw">🐾 🐱 🐾</div>
 
-      <h1>Bob, másnéven Booby</h1>
+      <h1>Bob aka Booby</h1>
 
       <p>
-        Ez az oldal hivatalosan is Schndr macskájának,
-        Bobnak készült.
+        Egy legendás macska, egy igazi úr, aki több helyen lakott,
+        mint egy stewardess országban jár, és akit többször rúgtak le az ágyról,
+        mint ő arra valaha számított.
       </p>
 
-      <p>
-        Egy legendás macska, egy igazi úr, egy kis szőrös főnök,
-        aki valószínűleg pontosan tudja, hogy ő a legfontosabb személy a lakásban.
-      </p>
-
-      <button onclick="showMessage()">Booby titkos üzenete</button>
+      <button id="secretButton" onclick="toggleMessage()">Booby titkos üzenete</button>
 
       <p id="secretMessage" class="hidden">
         Kedves Schndr!  
@@ -201,7 +211,8 @@
 
       <p>
         Köszönöm, hogy etetsz, szeretsz, elviselsz, simogatsz,
-        és néha még akkor is aranyosnak tartasz, amikor teljesen indokolatlanul furán viselkedem.
+        és néha még akkor is aranyosnak tartasz, amikor teljesen indokolatlanul
+        3 kilómétert futok a létező összes útvonalon.
       </p>
 
       <p>
@@ -222,8 +233,17 @@
   </audio>
 
   <script>
-    function showMessage() {
-      document.getElementById("secretMessage").classList.remove("hidden");
+    function toggleMessage() {
+      const message = document.getElementById("secretMessage");
+      const button = document.getElementById("secretButton");
+
+      message.classList.toggle("hidden");
+
+      if (message.classList.contains("hidden")) {
+        button.innerText = "Booby titkos üzenete";
+      } else {
+        button.innerText = "Üzenet visszacsukása";
+      }
     }
 
     function playMusic() {
