@@ -185,6 +185,8 @@
       max-width: 900px;
       width: 100%;
       box-sizing: border-box;
+      position: relative;
+      z-index: 1600;
     }
 
     .secret-video-layout {
@@ -215,6 +217,51 @@
     .stop-button:hover {
       background: #d0002a;
       transform: scale(1.08) rotate(-1deg);
+    }
+
+    .stop-chaos-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1200;
+      display: none;
+    }
+
+    .stop-chaos-layer.active {
+      display: block;
+    }
+
+    .flying-stop {
+      position: absolute;
+      background: #d0002a;
+      color: white;
+      border: 3px solid white;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 900;
+      font-size: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      animation: flyStop linear forwards;
+      transform: translate(-50%, -50%) rotate(0deg);
+      opacity: 0.95;
+      white-space: nowrap;
+    }
+
+    @keyframes flyStop {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(var(--move-x), var(--move-y)) rotate(var(--spin)) scale(1.15);
+        opacity: 0;
+      }
     }
 
     .toast {
@@ -309,6 +356,8 @@
   <div id="lockToast" class="toast">
     Nana, nézzük csak meg mind a 4 képet egy titkos opció feloldásához. 😼
   </div>
+
+  <div id="stopChaosLayer" class="stop-chaos-layer"></div>
 
   <div class="section">
     <div class="card">
@@ -406,7 +455,8 @@
       </p>
 
       <div class="secret-video-layout">
-        <video id="secretVideo" class="secret-video" controls>
+        <video id="secretVideo" class="secret-video" controls playsinline preload="metadata">
+          <source src="bob1.mp4" type="video/mp4">
           <source src="bob1.mov" type="video/quicktime">
           A böngésződ nem támogatja ezt a videót.
         </video>
@@ -453,6 +503,7 @@
     const viewedImages = new Set();
     const totalImages = 4;
     let lockCooldown = false;
+    let stopChaosInterval = null;
 
     function toggleMessage() {
       const message = document.getElementById("secretMessage");
@@ -533,9 +584,17 @@
         block: "center"
       });
 
-      secretVideo.play().catch(() => {
-        console.log("A böngésző nem engedte az automatikus videóindítást.");
-      });
+      startStopChaos();
+
+      secretVideo.load();
+
+      const playPromise = secretVideo.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          alert("Bob szerint kattints rá kézzel a Play gombra. A böngésző most makacskodik. 😼");
+        });
+      }
     }
 
     function stopSecretVideo() {
@@ -544,7 +603,69 @@
       secretVideo.pause();
       secretVideo.currentTime = 0;
 
+      stopStopChaos();
+
       alert("Bob emergency protocol activated. Videó megállítva. 😼");
+    }
+
+    function startStopChaos() {
+      const layer = document.getElementById("stopChaosLayer");
+      layer.classList.add("active");
+
+      if (stopChaosInterval) {
+        return;
+      }
+
+      for (let i = 0; i < 14; i++) {
+        setTimeout(createFlyingStop, i * 90);
+      }
+
+      stopChaosInterval = setInterval(createFlyingStop, 260);
+    }
+
+    function stopStopChaos() {
+      const layer = document.getElementById("stopChaosLayer");
+
+      if (stopChaosInterval) {
+        clearInterval(stopChaosInterval);
+        stopChaosInterval = null;
+      }
+
+      layer.classList.remove("active");
+      layer.innerHTML = "";
+    }
+
+    function createFlyingStop() {
+      const layer = document.getElementById("stopChaosLayer");
+
+      if (!layer.classList.contains("active")) {
+        return;
+      }
+
+      const stop = document.createElement("div");
+      stop.className = "flying-stop";
+      stop.innerText = "STOP!";
+
+      const startX = Math.random() * 100;
+      const startY = Math.random() * 100;
+
+      const moveX = (Math.random() * 900 - 450) + "px";
+      const moveY = (Math.random() * 700 - 350) + "px";
+      const spin = (Math.random() * 720 - 360) + "deg";
+      const duration = Math.random() * 2.5 + 2.2;
+
+      stop.style.left = startX + "vw";
+      stop.style.top = startY + "vh";
+      stop.style.setProperty("--move-x", moveX);
+      stop.style.setProperty("--move-y", moveY);
+      stop.style.setProperty("--spin", spin);
+      stop.style.animationDuration = duration + "s";
+
+      layer.appendChild(stop);
+
+      setTimeout(() => {
+        stop.remove();
+      }, duration * 1000);
     }
 
     function showLockToast() {
@@ -583,6 +704,14 @@
       if (event.key === "Escape") {
         closeLightbox();
       }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const secretVideo = document.getElementById("secretVideo");
+
+      secretVideo.addEventListener("ended", function() {
+        stopStopChaos();
+      });
     });
 
     function createCat() {
