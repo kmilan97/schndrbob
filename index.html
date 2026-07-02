@@ -89,6 +89,17 @@
       background: #133b63;
     }
 
+    .disabled-link {
+      background: #7b8794;
+      cursor: not-allowed;
+      opacity: 0.75;
+    }
+
+    .disabled-link:hover {
+      transform: none;
+      background: #7b8794;
+    }
+
     .hidden {
       display: none;
     }
@@ -279,6 +290,30 @@
       font-weight: bold;
       max-width: 90%;
       display: none;
+    }
+
+    .music-status-box {
+      margin-top: 24px;
+      background: rgba(255, 255, 255, 0.86);
+      padding: 20px 24px;
+      border-radius: 24px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.16);
+      max-width: 650px;
+      color: #0b2545;
+      font-weight: bold;
+    }
+
+    .next-page-box {
+      margin-top: 24px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 24px;
+      border-radius: 24px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+      max-width: 650px;
+    }
+
+    .next-page-box.locked {
+      opacity: 0.85;
     }
 
     .cat {
@@ -483,6 +518,25 @@
       </p>
 
       <button id="musicButton" onclick="toggleMusic()">Play Amazing booby trap 🎵</button>
+
+      <div id="musicStatusBox" class="music-status-box">
+        A következő oldal feloldásához kötelező egyszer végighallgatni az Amazing booby trapet. Bob figyel. 😼
+      </div>
+
+      <div id="nextPageBox" class="next-page-box locked">
+        <p id="nextPageStatus">
+          Következő oldal zárolva. Előbb hallgasd végig Bob himnuszát.
+        </p>
+
+        <a
+          id="nextPageButton"
+          class="secret-button disabled-link"
+          href="next.html"
+          onclick="handleNextPageClick(event)"
+        >
+          Tovább a következő oldalra 🔒
+        </a>
+      </div>
     </div>
   </div>
 
@@ -495,7 +549,7 @@
     <img id="lightboxImage" src="" alt="Nagy Bob kép" onclick="event.stopPropagation()">
   </div>
 
-  <audio id="music" loop>
+  <audio id="music" preload="metadata">
     <source src="music/Amazing%20booby%20trap.mp3" type="audio/mpeg">
   </audio>
 
@@ -504,6 +558,10 @@
     const totalImages = 4;
     let lockCooldown = false;
     let stopChaosInterval = null;
+
+    let musicStarted = false;
+    let musicCompleted = false;
+    let musicReminderStarted = false;
 
     function toggleMessage() {
       const message = document.getElementById("secretMessage");
@@ -522,12 +580,78 @@
       const music = document.getElementById("music");
       const button = document.getElementById("musicButton");
 
+      if (musicCompleted) {
+        music.currentTime = 0;
+        musicCompleted = false;
+        lockNextPageAgain();
+      }
+
       if (music.paused) {
-        music.play();
-        button.innerText = "Pause Amazing booby trap ⏸️";
+        musicStarted = true;
+
+        const playPromise = music.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              button.innerText = "Pause Amazing booby trap ⏸️";
+              updateMusicStatus("Bob himnusza folyamatban. Végig kell hallgatni. 😼");
+            })
+            .catch(() => {
+              showToast("Bob szerint kattints rá újra a Play gombra. A böngésző most makacskodik. 😼");
+            });
+        }
       } else {
         music.pause();
         button.innerText = "Play Amazing booby trap 🎵";
+        updateMusicStatus("Szüneteltetve. Bob ezt természetesen észrevette. A végighallgatás továbbra is kötelező.");
+      }
+    }
+
+    function updateMusicStatus(text) {
+      const musicStatusBox = document.getElementById("musicStatusBox");
+      musicStatusBox.innerText = text;
+    }
+
+    function unlockNextPage() {
+      const nextPageBox = document.getElementById("nextPageBox");
+      const nextPageButton = document.getElementById("nextPageButton");
+      const nextPageStatus = document.getElementById("nextPageStatus");
+      const musicButton = document.getElementById("musicButton");
+
+      musicCompleted = true;
+
+      nextPageBox.classList.remove("locked");
+      nextPageButton.classList.remove("disabled-link");
+      nextPageButton.innerText = "Tovább a következő oldalra 🚀";
+      nextPageStatus.innerText = "Bob jóváhagyta. A következő oldal feloldva.";
+      musicButton.innerText = "Amazing booby trap teljesítve ✅";
+
+      updateMusicStatus("Meghallgatás teljesítve. Bob elégedett. 😼");
+      showToast("Amazing booby trap teljesítve. A következő oldal feloldva. 😼");
+    }
+
+    function lockNextPageAgain() {
+      const nextPageBox = document.getElementById("nextPageBox");
+      const nextPageButton = document.getElementById("nextPageButton");
+      const nextPageStatus = document.getElementById("nextPageStatus");
+
+      nextPageBox.classList.add("locked");
+      nextPageButton.classList.add("disabled-link");
+      nextPageButton.innerText = "Tovább a következő oldalra 🔒";
+      nextPageStatus.innerText = "Következő oldal zárolva. Előbb hallgasd végig Bob himnuszát.";
+    }
+
+    function handleNextPageClick(event) {
+      if (!musicCompleted) {
+        event.preventDefault();
+        showToast("Nana. A következő oldalhoz előbb végig kell hallgatni az Amazing booby trapet. Bob nem alkuszik. 😼");
+
+        const musicSection = document.getElementById("afterGallerySection");
+        musicSection.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
       }
     }
 
@@ -668,13 +792,19 @@
       }, duration * 1000);
     }
 
-    function showLockToast() {
+    function showToast(message) {
       const toast = document.getElementById("lockToast");
+
+      toast.innerText = message;
       toast.style.display = "block";
 
       setTimeout(() => {
         toast.style.display = "none";
-      }, 3000);
+      }, 3500);
+    }
+
+    function showLockToast() {
+      showToast("Nana, nézzük csak meg mind a 4 képet egy titkos opció feloldásához. 😼");
     }
 
     window.addEventListener("scroll", function() {
@@ -708,10 +838,34 @@
 
     document.addEventListener("DOMContentLoaded", function() {
       const secretVideo = document.getElementById("secretVideo");
+      const music = document.getElementById("music");
+      const afterGallerySection = document.getElementById("afterGallerySection");
 
       secretVideo.addEventListener("ended", function() {
         stopStopChaos();
       });
+
+      music.addEventListener("ended", function() {
+        unlockNextPage();
+      });
+
+      const musicObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !musicReminderStarted && !musicStarted && !musicCompleted) {
+            musicReminderStarted = true;
+
+            setTimeout(function() {
+              if (!musicStarted && !musicCompleted) {
+                showToast("Nana. Az Amazing booby trap meghallgatása kötelező a továbblépéshez. Bob figyel. 😼");
+              }
+            }, 2000);
+          }
+        });
+      }, {
+        threshold: 0.45
+      });
+
+      musicObserver.observe(afterGallerySection);
     });
 
     function createCat() {
