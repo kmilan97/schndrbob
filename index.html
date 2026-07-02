@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Bob aka Booby 🐱</title>
+  <title>Bob LinkedIn Entry 🐱</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #b8e7ff, #6bbcff, #2f80ed);
+      background: linear-gradient(135deg, #0b2545, #2f80ed, #b8e7ff);
       color: #102a43;
       text-align: center;
       overflow-x: hidden;
@@ -22,8 +22,8 @@
       left: 16px;
       font-size: 13px;
       font-weight: bold;
-      color: #0b2545;
-      opacity: 0.75;
+      color: white;
+      opacity: 0.85;
       z-index: 1000;
       letter-spacing: 0.5px;
     }
@@ -32,48 +32,84 @@
       min-height: 100vh;
       padding: 60px 20px;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.76);
-      padding: 32px;
-      border-radius: 28px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.22);
+      background: rgba(255, 255, 255, 0.84);
+      padding: 34px;
+      border-radius: 30px;
+      box-shadow: 0 16px 42px rgba(0,0,0,0.28);
       backdrop-filter: blur(8px);
-      max-width: 750px;
+      max-width: 850px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     h1 {
       font-size: 44px;
-      margin-bottom: 10px;
       color: #0b2545;
+      margin-bottom: 10px;
     }
 
     h2 {
-      font-size: 30px;
-      margin-top: 40px;
       color: #0b2545;
+      margin-top: 10px;
     }
 
     p {
       font-size: 20px;
-      max-width: 680px;
       line-height: 1.6;
       color: #102a43;
     }
 
-    strong {
-      color: #0b2545;
+    .intro-text {
+      max-width: 760px;
+      margin: 0 auto;
     }
 
-    button, .secret-button {
-      margin-top: 25px;
-      padding: 14px 25px;
+    .progress {
+      margin-top: 28px;
+      padding: 16px 22px;
+      background: rgba(11, 37, 69, 0.92);
+      color: white;
+      border-radius: 22px;
+      font-weight: bold;
+      font-size: 18px;
+      display: inline-block;
+    }
+
+    .task {
+      margin-top: 34px;
+      padding: 28px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .task.locked {
+      opacity: 0.45;
+      pointer-events: none;
+      filter: grayscale(0.8);
+    }
+
+    .task.completed {
+      border: 4px solid rgba(11, 37, 69, 0.55);
+    }
+
+    .task.completed h2::after {
+      content: " ✅";
+    }
+
+    button, .main-link {
+      margin-top: 18px;
+      padding: 14px 24px;
       border: none;
-      border-radius: 30px;
+      border-radius: 999px;
       background: #0b2545;
       color: white;
       font-size: 18px;
@@ -84,195 +120,127 @@
       display: inline-block;
     }
 
-    button:hover, .secret-button:hover {
+    button:hover, .main-link:hover {
       transform: scale(1.06);
       background: #133b63;
     }
 
-    .disabled-link {
+    .no-button {
       background: #7b8794;
-      cursor: not-allowed;
-      opacity: 0.75;
+      margin-left: 12px;
     }
 
-    .disabled-link:hover {
-      transform: none;
-      background: #7b8794;
+    .no-button:hover {
+      background: #616e7c;
     }
 
-    .hidden {
-      display: none;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 22px;
-      margin-top: 30px;
-      width: 100%;
-      max-width: 950px;
-    }
-
-    .gallery-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: 0.25s;
-    }
-
-    .gallery-item.viewed .photo-box {
-      box-shadow: 0 0 0 4px rgba(11, 37, 69, 0.55), 0 8px 20px rgba(0,0,0,0.15);
-    }
-
-    .gallery-item.viewed .caption::after {
-      content: " ✅";
-    }
-
-    .photo-box {
-      background: rgba(255,255,255,0.76);
+    .runaway-area {
+      position: relative;
+      height: 170px;
+      margin-top: 18px;
       border-radius: 24px;
-      padding: 12px;
-      min-height: 260px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      background: rgba(184, 231, 255, 0.45);
       overflow: hidden;
+      border: 2px dashed rgba(11, 37, 69, 0.25);
     }
 
-    .photo-box img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 18px;
-      display: block;
+    #yesButton {
+      position: absolute;
+      left: 40%;
+      top: 55px;
+      background: #0b2545;
+    }
+
+    .hint {
+      margin-top: 18px;
+      font-weight: bold;
+      color: #0b2545;
+      min-height: 28px;
+    }
+
+    .captcha-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .captcha-tile {
+      background: rgba(255,255,255,0.9);
+      border-radius: 22px;
+      padding: 12px;
       cursor: pointer;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.16);
+      border: 4px solid transparent;
       transition: 0.2s;
+      min-height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
 
-    .photo-box img:hover {
+    .captcha-tile:hover {
       transform: scale(1.03);
     }
 
-    .caption {
-      margin-top: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #0b2545;
+    .captcha-tile.selected {
+      border-color: #0b2545;
+      background: rgba(184, 231, 255, 0.92);
     }
 
-    .progress-box {
-      margin-top: 28px;
-      background: rgba(255, 255, 255, 0.78);
-      padding: 18px 24px;
-      border-radius: 22px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.14);
-      color: #0b2545;
-      font-size: 18px;
-      font-weight: bold;
-      max-width: 650px;
-    }
-
-    .secret-unlock {
-      margin-top: 24px;
-      background: rgba(255, 255, 255, 0.86);
-      padding: 24px;
-      border-radius: 24px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.18);
-      max-width: 650px;
-    }
-
-    .secret-unlock p {
-      margin: 0 auto;
-      font-weight: bold;
-    }
-
-    .secret-video-box {
-      margin-top: 30px;
-      background: rgba(255, 255, 255, 0.88);
-      padding: 24px;
-      border-radius: 26px;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.22);
-      max-width: 900px;
+    .captcha-tile img {
       width: 100%;
-      box-sizing: border-box;
-      position: relative;
-      z-index: 1600;
-    }
-
-    .secret-video-layout {
-      display: flex;
-      gap: 22px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-
-    .secret-video {
-      width: 100%;
-      max-width: 560px;
-      border-radius: 22px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.28);
-      background: #000;
-    }
-
-    .stop-button {
-      background: #b00020;
-      color: white;
-      font-size: 20px;
-      max-width: 260px;
-      line-height: 1.3;
-    }
-
-    .stop-button:hover {
-      background: #d0002a;
-      transform: scale(1.08) rotate(-1deg);
-    }
-
-    .stop-chaos-layer {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 1200;
-      display: none;
-    }
-
-    .stop-chaos-layer.active {
+      height: 135px;
+      object-fit: cover;
+      border-radius: 16px;
       display: block;
     }
 
-    .flying-stop {
-      position: absolute;
-      background: #d0002a;
-      color: white;
-      border: 3px solid white;
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-weight: 900;
-      font-size: 18px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-      animation: flyStop linear forwards;
-      transform: translate(-50%, -50%) rotate(0deg);
-      opacity: 0.95;
-      white-space: nowrap;
+    .fake-animal {
+      font-size: 58px;
+      margin-bottom: 10px;
     }
 
-    @keyframes flyStop {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg) scale(0.8);
-        opacity: 0;
-      }
+    .tile-label {
+      font-weight: bold;
+      color: #0b2545;
+      margin-top: 8px;
+      font-size: 14px;
+    }
 
-      10% {
-        opacity: 1;
-      }
+    .dreamies-input {
+      margin-top: 18px;
+      padding: 14px 18px;
+      border-radius: 18px;
+      border: 2px solid #0b2545;
+      font-size: 20px;
+      text-align: center;
+      max-width: 220px;
+      width: 80%;
+    }
 
-      100% {
-        transform: translate(var(--move-x), var(--move-y)) rotate(var(--spin)) scale(1.15);
-        opacity: 0;
-      }
+    .dreamies-warning {
+      margin-top: 20px;
+      background: rgba(255, 243, 196, 0.95);
+      padding: 18px;
+      border-radius: 20px;
+      color: #0b2545;
+      font-weight: bold;
+      display: none;
+    }
+
+    .unlock-box {
+      margin-top: 36px;
+      padding: 30px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 14px 38px rgba(0,0,0,0.22);
+      display: none;
+    }
+
+    .unlock-box.show {
+      display: block;
     }
 
     .toast {
@@ -292,30 +260,6 @@
       display: none;
     }
 
-    .music-status-box {
-      margin-top: 24px;
-      background: rgba(255, 255, 255, 0.86);
-      padding: 20px 24px;
-      border-radius: 24px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.16);
-      max-width: 650px;
-      color: #0b2545;
-      font-weight: bold;
-    }
-
-    .next-page-box {
-      margin-top: 24px;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 24px;
-      border-radius: 24px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.18);
-      max-width: 650px;
-    }
-
-    .next-page-box.locked {
-      opacity: 0.85;
-    }
-
     .cat {
       position: fixed;
       top: -30px;
@@ -332,547 +276,386 @@
       }
     }
 
-    .paw {
-      font-size: 34px;
-      margin: 10px;
-    }
-
     footer {
-      padding: 40px 20px;
-      font-size: 18px;
-      color: #0b2545;
-      font-weight: bold;
-    }
-
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.82);
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .lightbox img {
-      max-width: 92vw;
-      max-height: 86vh;
-      border-radius: 22px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    }
-
-    .close-lightbox {
-      position: fixed;
-      top: 22px;
-      right: 30px;
       color: white;
-      font-size: 42px;
       font-weight: bold;
-      cursor: pointer;
-      z-index: 2100;
-      user-select: none;
-    }
-
-    .close-lightbox:hover {
-      transform: scale(1.1);
+      padding: 40px 20px;
+      opacity: 0.9;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="corner-brand">Bobert ™ ( vibe coding purpose only )</div>
+  <div class="corner-brand">Bobert ™ onboarding system</div>
 
-  <div id="lockToast" class="toast">
-    Nana, nézzük csak meg mind a 4 képet egy titkos opció feloldásához. 😼
-  </div>
-
-  <div id="stopChaosLayer" class="stop-chaos-layer"></div>
+  <div id="toast" class="toast"></div>
 
   <div class="section">
     <div class="card">
-      <div class="paw">🐾 🐱 🐾</div>
+      <h1>Bob hivatalos LinkedIn oldala</h1>
 
-      <h1>Bob aka Booby</h1>
-
-      <p>
-        Egy legendás macska, egy (kand)úr, aki több helyen lakott,
-        mint egy stewardess országban jár, és akit többször rúgtak le az ágyról,
-        mint ő arra valaha számított.
+      <p class="intro-text">
+        Üdvözöllek Bob hivatalos LinkedIn oldalán.
+        Itt azonban fordított a világ: most te küzdesz értem,
+        nem pedig én érted.
       </p>
 
-      <button id="secretButton" onclick="toggleMessage()">Booby titkos üzenete</button>
-
-      <p id="secretMessage" class="hidden">
-        Kedves Schndr!  
-        Én, Bob, vagyis Booby, hivatalosan kijelentem, hogy te vagy a kedvenc emberem.
-        Persze ezt nem mindig mutatom ki, mert macska vagyok, és az imidzsemet védenem kell. 🐱❤️
-      </p>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="card">
-      <h2>Bob hivatalos adatlapja</h2>
-
-      <p><strong>Név:</strong> Bob</p>
-      <p><strong>Becenév:</strong> Booby</p>
-      <p><strong>Tulajdonos:</strong> Schndr</p>
-      <p><strong>Foglalkozás:</strong> főállású cukiság és Dreamies minőségellenőr</p>
-      <p><strong>Testsúly:</strong> 4,5 kg ± 1</p>
-      <p><strong>Szín:</strong> ofc vörös</p>
-      <p><strong>Specialitás:</strong> emberek manipulálása nézéssel</p>
-      <p><strong>Rang:</strong> királyi macska</p>
-    </div>
-  </div>
-
-  <div id="gallerySection" class="section">
-    <h2>Booby galéria</h2>
-
-    <p>
-      Néhány történelmi jelentőségű felvétel Bobról.
-    </p>
-
-    <div class="gallery">
-
-      <div id="galleryItem1" class="gallery-item">
-        <div class="photo-box">
-          <img src="bob9.jpg" alt="Bob kép 1" onclick="openLightbox('bob9.jpg', 1)">
-        </div>
-        <div class="caption">Szűrt vizet az úrnak? Nem köszi, csapból iszom</div>
-      </div>
-
-      <div id="galleryItem2" class="gallery-item">
-        <div class="photo-box">
-          <img src="bob10.jpg" alt="Bob kép 2" onclick="openLightbox('bob10.jpg', 2)">
-        </div>
-        <div class="caption">Bob, amikor modell fotózáson járt</div>
-      </div>
-
-      <div id="galleryItem3" class="gallery-item">
-        <div class="photo-box">
-          <img src="bob1.jpg" alt="Bob kép 3" onclick="openLightbox('bob1.jpg', 3)">
-        </div>
-        <div class="caption">Bob, az utolsó védőbástyája az AI harcnak</div>
-      </div>
-
-      <div id="galleryItem4" class="gallery-item">
-        <div class="photo-box">
-          <img src="bob4.jpg" alt="Bob kép 4" onclick="openLightbox('bob4.jpg', 4)">
-        </div>
-        <div class="caption">Booby, teljes királyi nyugalomban</div>
-      </div>
-
-    </div>
-
-    <div id="progressBox" class="progress-box">
-      Még 4 képet kell megnézned a titkos opció feloldásához.
-    </div>
-
-    <div id="secretUnlock" class="secret-unlock hidden">
-      <p>Gratulálunk. Bob engedélyezte a hozzáférést. 🐱</p>
-
-      <button id="nsfwButton" class="secret-button" onclick="showSecretVideo()">
-        Feloldottad az NSFW verziót 😼
-      </button>
-    </div>
-
-    <div id="secretVideoBox" class="secret-video-box hidden">
-      <h2>Bob classified footage</h2>
-
-      <p>
-        Figyelem: a következő felvétel kizárólag erős idegzetű Booby-rajongóknak ajánlott.
+      <p class="intro-text">
+        Az önéletrajzom, referenciáim és szakmai macskaeredményeim
+        feloldásához először teljesítened kell 3 rövid, de Bob által jóváhagyott feladatot.
       </p>
 
-      <div class="secret-video-layout">
-        <video id="secretVideo" class="secret-video" controls playsinline preload="metadata">
-          <source src="bob1.mp4" type="video/mp4">
-          <source src="bob1.mov" type="video/quicktime">
-          A böngésződ nem támogatja ezt a videót.
-        </video>
-
-        <button class="stop-button" onclick="stopSecretVideo()">
-          STOP STOP STOP STOP
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div id="afterGallerySection" class="section">
-    <div class="card">
-      <h2>Booby üzenete Schndr-nek</h2>
-
-      <p>
-        Köszönöm, hogy etetsz, szeretsz, elviselsz, simogatsz,
-        és néha még akkor is aranyosnak tartasz, amikor teljesen indokolatlanul furán viselkedem.
-      </p>
-
-      <p>
-        Ez az oldal azért létezik, mert valaki gondolt rád,
-        és Bobra is. Főleg Bobra. De rád is. ❤️
-      </p>
-
-      <button id="musicButton" onclick="toggleMusic()">Play Amazing booby trap 🎵</button>
-
-      <div id="musicStatusBox" class="music-status-box">
-        A következő oldal feloldásához kötelező egyszer végighallgatni az Amazing booby trapet. Bob figyel. 😼
+      <div id="progress" class="progress">
+        Teljesített feladatok: 0 / 3
       </div>
 
-      <div id="nextPageBox" class="next-page-box locked">
-        <p id="nextPageStatus">
-          Következő oldal zárolva. Előbb hallgasd végig Bob himnuszát.
+      <div id="task1" class="task">
+        <h2>1. feladat: Kapd el az Igen gombot</h2>
+
+        <p>
+          Szeretnéd megtekinteni Bob szakmai önéletrajzát?
         </p>
 
-        <a
-          id="nextPageButton"
-          class="secret-button disabled-link"
-          href="next.html"
-          onclick="handleNextPageClick(event)"
-        >
-          Tovább a következő oldalra 🔒
+        <div class="runaway-area">
+          <button
+            id="yesButton"
+            onmouseenter="runAwayFromMouse()"
+            onclick="tryCatchYesButton()"
+          >
+            Igen
+          </button>
+        </div>
+
+        <button class="no-button" onclick="wrongNoAnswer()">
+          Nem
+        </button>
+
+        <div id="runawayHint" class="hint">
+          Az Igen gomb teljesen normálisan viselkedik. Elméletileg.
+        </div>
+      </div>
+
+      <div id="task2" class="task locked">
+        <h2>2. feladat: Bob captcha</h2>
+
+        <p>
+          Bizonyítsd be, hogy nem vagy kutya. Válaszd ki az összes képet, amin Bob szerepel.
+        </p>
+
+        <div class="captcha-grid">
+
+          <div class="captcha-tile" data-is-bob="true" onclick="toggleCaptchaTile(this)">
+            <img src="bob9.jpg" alt="Bob captcha 1">
+            <div class="tile-label">Gyanúsan Bob</div>
+          </div>
+
+          <div class="captcha-tile" data-is-bob="false" onclick="toggleCaptchaTile(this)">
+            <div class="fake-animal">🐶</div>
+            <div class="tile-label">Nem Bob. Hanem kutya. Elfogadhatatlan.</div>
+          </div>
+
+          <div class="captcha-tile" data-is-bob="true" onclick="toggleCaptchaTile(this)">
+            <img src="bob10.jpg" alt="Bob captcha 2">
+            <div class="tile-label">Modellgyanús Bob</div>
+          </div>
+
+          <div class="captcha-tile" data-is-bob="false" onclick="toggleCaptchaTile(this)">
+            <div class="fake-animal">🦊</div>
+            <div class="tile-label">Vörös, de nem Bob</div>
+          </div>
+
+          <div class="captcha-tile" data-is-bob="true" onclick="toggleCaptchaTile(this)">
+            <img src="bob1.jpg" alt="Bob captcha 3">
+            <div class="tile-label">AI elleni Bob</div>
+          </div>
+
+          <div class="captcha-tile" data-is-bob="true" onclick="toggleCaptchaTile(this)">
+            <img src="bob4.jpg" alt="Bob captcha 4">
+            <div class="tile-label">Királyi nyugalomban Bob</div>
+          </div>
+
+        </div>
+
+        <button onclick="checkBobCaptcha()">
+          Bob captcha ellenőrzése
+        </button>
+
+        <div id="captchaHint" class="hint">
+          Tipp: Bob általában úgy néz ki, mintha ő fizetné a lakbért.
+        </div>
+      </div>
+
+      <div id="task3" class="task locked">
+        <h2>3. feladat: Dreamies minőségellenőrzés</h2>
+
+        <p>
+          Add meg, mennyi Dreamies-t kapott ma Bob.
+          A rendszer csak akkor enged tovább, ha a napi mennyiség legalább 10.
+        </p>
+
+        <input
+          id="dreamiesInput"
+          class="dreamies-input"
+          type="number"
+          min="0"
+          placeholder="pl. 10"
+        />
+
+        <br>
+
+        <button onclick="checkDreamies()">
+          Dreamies mennyiség ellenőrzése
+        </button>
+
+        <div id="dreamiesWarning" class="dreamies-warning"></div>
+
+        <button id="giveMissingDreamiesButton" class="hidden" onclick="confirmMissingDreamiesGiven()">
+          Rendben, Bob megkapta a hiányzó Dreamies-t
+        </button>
+
+        <div id="dreamiesHint" class="hint">
+          Bob könyvelése szigorú. A Dreamies-hiány nem vicc.
+        </div>
+      </div>
+
+      <div id="unlockBox" class="unlock-box">
+        <h2>Bob jóváhagyta a belépést 🐱</h2>
+
+        <p>
+          Teljesítetted a 3 feladatot. Bob önéletrajza, szakmai múltja és titkos aktái megnyithatók.
+        </p>
+
+        <a class="main-link" href="cv.html">
+          Bob önéletrajzának megnyitása 🚀
         </a>
       </div>
+
     </div>
   </div>
 
   <footer>
-    Made for Schndr & Bob / Booby 🐱❤️
+    Bob LinkedIn onboarding completed by Bobert ™
   </footer>
 
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="close-lightbox" onclick="closeLightbox()">×</span>
-    <img id="lightboxImage" src="" alt="Nagy Bob kép" onclick="event.stopPropagation()">
-  </div>
-
-  <audio id="music" preload="metadata">
-    <source src="music/Amazing%20booby%20trap.mp3" type="audio/mpeg">
-  </audio>
-
   <script>
-    const viewedImages = new Set();
-    const totalImages = 4;
-    let lockCooldown = false;
-    let stopChaosInterval = null;
+    let completedTasks = 0;
+    let task1Completed = false;
+    let task2Completed = false;
+    let task3Completed = false;
 
-    let musicStarted = false;
-    let musicCompleted = false;
-    let musicReminderStarted = false;
+    let runawayAttempts = 0;
+    let yesButtonCatchable = false;
+    let missingDreamiesAmount = 0;
 
-    function toggleMessage() {
-      const message = document.getElementById("secretMessage");
-      const button = document.getElementById("secretButton");
+    function updateProgress() {
+      const progress = document.getElementById("progress");
+      progress.innerText = "Teljesített feladatok: " + completedTasks + " / 3";
 
-      message.classList.toggle("hidden");
-
-      if (message.classList.contains("hidden")) {
-        button.innerText = "Booby titkos üzenete";
-      } else {
-        button.innerText = "Üzenet visszacsukása";
+      if (completedTasks === 3) {
+        document.getElementById("unlockBox").classList.add("show");
+        showToast("Bob jóváhagyta a belépést. A CV feloldva. 😼");
       }
     }
 
-    function toggleMusic() {
-      const music = document.getElementById("music");
-      const button = document.getElementById("musicButton");
-
-      if (musicCompleted) {
-        music.currentTime = 0;
-        musicCompleted = false;
-        lockNextPageAgain();
+    function completeTask(taskNumber) {
+      if (taskNumber === 1 && !task1Completed) {
+        task1Completed = true;
+        completedTasks++;
+        document.getElementById("task1").classList.add("completed");
+        document.getElementById("task2").classList.remove("locked");
+        showToast("1. feladat teljesítve. Bob hagyja, hogy továbbmenj. 😼");
       }
 
-      if (music.paused) {
-        musicStarted = true;
+      if (taskNumber === 2 && !task2Completed) {
+        task2Completed = true;
+        completedTasks++;
+        document.getElementById("task2").classList.add("completed");
+        document.getElementById("task3").classList.remove("locked");
+        showToast("2. feladat teljesítve. Nem vagy kutya. Valószínűleg.");
+      }
 
-        const playPromise = music.play();
+      if (taskNumber === 3 && !task3Completed) {
+        task3Completed = true;
+        completedTasks++;
+        document.getElementById("task3").classList.add("completed");
+        showToast("3. feladat teljesítve. Dreamies-egyenleg elfogadva.");
+      }
 
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              button.innerText = "Pause Amazing booby trap ⏸️";
-              updateMusicStatus("Bob himnusza folyamatban. Végig kell hallgatni. 😼");
-            })
-            .catch(() => {
-              showToast("Bob szerint kattints rá újra a Play gombra. A böngésző most makacskodik. 😼");
-            });
+      updateProgress();
+    }
+
+    function runAwayFromMouse() {
+      if (yesButtonCatchable || task1Completed) {
+        return;
+      }
+
+      runawayAttempts++;
+      moveYesButton();
+
+      if (runawayAttempts === 3) {
+        document.getElementById("runawayHint").innerText =
+          "Hahaha, most te kergetsz, mint szoktam a játékomat.";
+      }
+
+      if (runawayAttempts >= 5) {
+        yesButtonCatchable = true;
+        document.getElementById("runawayHint").innerText =
+          "Jó, Bob megsajnált. Most már megpróbálhatod elkapni. Én gyorsabban elkapom.";
+      }
+    }
+
+    function moveYesButton() {
+      const yesButton = document.getElementById("yesButton");
+      const area = document.querySelector(".runaway-area");
+
+      const maxX = area.clientWidth - yesButton.offsetWidth - 20;
+      const maxY = area.clientHeight - yesButton.offsetHeight - 20;
+
+      const randomX = Math.max(10, Math.random() * maxX);
+      const randomY = Math.max(10, Math.random() * maxY);
+
+      yesButton.style.left = randomX + "px";
+      yesButton.style.top = randomY + "px";
+    }
+
+    function tryCatchYesButton() {
+      if (task1Completed) {
+        return;
+      }
+
+      if (!yesButtonCatchable) {
+        runawayAttempts++;
+        moveYesButton();
+
+        if (runawayAttempts >= 5) {
+          yesButtonCatchable = true;
+          document.getElementById("runawayHint").innerText =
+            "Jó, Bob megsajnált. Most már megpróbálhatod elkapni. Én gyorsabban elkapom.";
+        } else {
+          document.getElementById("runawayHint").innerText =
+            "Nem ilyen könnyű bejutni Bob szakmai profiljába.";
         }
-      } else {
-        music.pause();
-        button.innerText = "Play Amazing booby trap 🎵";
-        updateMusicStatus("Szüneteltetve. Bob ezt természetesen észrevette. A végighallgatás továbbra is kötelező.");
-      }
-    }
 
-    function updateMusicStatus(text) {
-      const musicStatusBox = document.getElementById("musicStatusBox");
-      musicStatusBox.innerText = text;
-    }
-
-    function unlockNextPage() {
-      const nextPageBox = document.getElementById("nextPageBox");
-      const nextPageButton = document.getElementById("nextPageButton");
-      const nextPageStatus = document.getElementById("nextPageStatus");
-      const musicButton = document.getElementById("musicButton");
-
-      musicCompleted = true;
-
-      nextPageBox.classList.remove("locked");
-      nextPageButton.classList.remove("disabled-link");
-      nextPageButton.innerText = "Tovább a következő oldalra 🚀";
-      nextPageStatus.innerText = "Bob jóváhagyta. A következő oldal feloldva.";
-      musicButton.innerText = "Amazing booby trap teljesítve ✅";
-
-      updateMusicStatus("Meghallgatás teljesítve. Bob elégedett. 😼");
-      showToast("Amazing booby trap teljesítve. A következő oldal feloldva. 😼");
-    }
-
-    function lockNextPageAgain() {
-      const nextPageBox = document.getElementById("nextPageBox");
-      const nextPageButton = document.getElementById("nextPageButton");
-      const nextPageStatus = document.getElementById("nextPageStatus");
-
-      nextPageBox.classList.add("locked");
-      nextPageButton.classList.add("disabled-link");
-      nextPageButton.innerText = "Tovább a következő oldalra 🔒";
-      nextPageStatus.innerText = "Következő oldal zárolva. Előbb hallgasd végig Bob himnuszát.";
-    }
-
-    function handleNextPageClick(event) {
-      if (!musicCompleted) {
-        event.preventDefault();
-        showToast("Nana. A következő oldalhoz előbb végig kell hallgatni az Amazing booby trapet. Bob nem alkuszik. 😼");
-
-        const musicSection = document.getElementById("afterGallerySection");
-        musicSection.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-      }
-    }
-
-    function openLightbox(imageSrc, imageNumber) {
-      markImageAsViewed(imageNumber);
-
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImage = document.getElementById("lightboxImage");
-
-      lightboxImage.src = imageSrc;
-      lightbox.style.display = "flex";
-    }
-
-    function closeLightbox() {
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImage = document.getElementById("lightboxImage");
-
-      lightbox.style.display = "none";
-      lightboxImage.src = "";
-    }
-
-    function markImageAsViewed(imageNumber) {
-      viewedImages.add(imageNumber);
-
-      const galleryItem = document.getElementById("galleryItem" + imageNumber);
-      if (galleryItem) {
-        galleryItem.classList.add("viewed");
+        return;
       }
 
-      updateUnlockProgress();
+      document.getElementById("runawayHint").innerText =
+        "Elkaptad. Bob ezt kelletlenül, de elfogadja.";
+      completeTask(1);
     }
 
-    function updateUnlockProgress() {
-      const progressBox = document.getElementById("progressBox");
-      const secretUnlock = document.getElementById("secretUnlock");
-      const remaining = totalImages - viewedImages.size;
+    function wrongNoAnswer() {
+      showToast("Nem? Bob HR-osztálya ezt elutasította.");
+      document.getElementById("runawayHint").innerText =
+        "A Nem gomb csak dísz. Természetesen szeretnéd látni Bob CV-jét.";
+    }
 
-      if (remaining > 0) {
-        progressBox.innerText = "Még " + remaining + " képet kell megnézned a titkos opció feloldásához.";
-      } else {
-        progressBox.innerText = "Mind a 4 kép megtekintve. A titkos opció feloldva. 😼";
-        secretUnlock.classList.remove("hidden");
+    function toggleCaptchaTile(tile) {
+      if (task2Completed) {
+        return;
       }
+
+      tile.classList.toggle("selected");
     }
 
-    function showSecretVideo() {
-      const secretVideoBox = document.getElementById("secretVideoBox");
-      const secretVideo = document.getElementById("secretVideo");
+    function checkBobCaptcha() {
+      const tiles = document.querySelectorAll(".captcha-tile");
+      let correct = true;
 
-      secretVideoBox.classList.remove("hidden");
+      tiles.forEach(function(tile) {
+        const isBob = tile.dataset.isBob === "true";
+        const selected = tile.classList.contains("selected");
 
-      secretVideoBox.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
+        if (isBob !== selected) {
+          correct = false;
+        }
       });
 
-      startStopChaos();
-
-      secretVideo.load();
-
-      const playPromise = secretVideo.play();
-
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          alert("Bob szerint kattints rá kézzel a Play gombra. A böngésző most makacskodik. 😼");
-        });
+      if (correct) {
+        document.getElementById("captchaHint").innerText =
+          "Sikeres Bob-azonosítás. A kutyagyanú csökkent.";
+        completeTask(2);
+      } else {
+        document.getElementById("captchaHint").innerText =
+          "Sikertelen captcha. Bob szerint nézd meg jobban. A vörös nem mindig Bob, de Bob mindig Bob.";
+        showToast("Captcha failed. Bob gyanakszik.");
       }
     }
 
-    function stopSecretVideo() {
-      const secretVideo = document.getElementById("secretVideo");
-
-      secretVideo.pause();
-      secretVideo.currentTime = 0;
-
-      stopStopChaos();
-
-      alert("Bob emergency protocol activated. Videó megállítva. 😼");
-    }
-
-    function startStopChaos() {
-      const layer = document.getElementById("stopChaosLayer");
-      layer.classList.add("active");
-
-      if (stopChaosInterval) {
+    function checkDreamies() {
+      if (task3Completed) {
         return;
       }
 
-      for (let i = 0; i < 14; i++) {
-        setTimeout(createFlyingStop, i * 90);
-      }
+      const input = document.getElementById("dreamiesInput");
+      const value = Number(input.value);
+      const warning = document.getElementById("dreamiesWarning");
+      const giveButton = document.getElementById("giveMissingDreamiesButton");
 
-      stopChaosInterval = setInterval(createFlyingStop, 260);
-    }
-
-    function stopStopChaos() {
-      const layer = document.getElementById("stopChaosLayer");
-
-      if (stopChaosInterval) {
-        clearInterval(stopChaosInterval);
-        stopChaosInterval = null;
-      }
-
-      layer.classList.remove("active");
-      layer.innerHTML = "";
-    }
-
-    function createFlyingStop() {
-      const layer = document.getElementById("stopChaosLayer");
-
-      if (!layer.classList.contains("active")) {
+      if (Number.isNaN(value) || input.value === "") {
+        warning.style.display = "block";
+        warning.innerText = "Bob nem tudja értelmezni ezt a mennyiséget. Írj be egy számot.";
+        giveButton.classList.add("hidden");
         return;
       }
 
-      const stop = document.createElement("div");
-      stop.className = "flying-stop";
-      stop.innerText = "STOP!";
+      if (value >= 10) {
+        warning.style.display = "block";
+        warning.innerText = "Elfogadva. Bob ma legalább 10 Dreamies-t kapott. Ez már tárgyalási alap.";
+        giveButton.classList.add("hidden");
+        completeTask(3);
+        return;
+      }
 
-      const startX = Math.random() * 100;
-      const startY = Math.random() * 100;
+      missingDreamiesAmount = 10 - value;
 
-      const moveX = (Math.random() * 900 - 450) + "px";
-      const moveY = (Math.random() * 700 - 350) + "px";
-      const spin = (Math.random() * 720 - 360) + "deg";
-      const duration = Math.random() * 2.5 + 2.2;
+      warning.style.display = "block";
+      warning.innerText =
+        "Oké, akkor most adnod kell Bobnak még " + missingDreamiesAmount +
+        " darab Dreamies-t a következő feladat előtt.";
 
-      stop.style.left = startX + "vw";
-      stop.style.top = startY + "vh";
-      stop.style.setProperty("--move-x", moveX);
-      stop.style.setProperty("--move-y", moveY);
-      stop.style.setProperty("--spin", spin);
-      stop.style.animationDuration = duration + "s";
+      giveButton.classList.remove("hidden");
 
-      layer.appendChild(stop);
+      document.getElementById("dreamiesHint").innerText =
+        "Bob vár. A Dreamies-adósság nem évül el.";
+    }
 
-      setTimeout(() => {
-        stop.remove();
-      }, duration * 1000);
+    function confirmMissingDreamiesGiven() {
+      if (missingDreamiesAmount <= 0) {
+        return;
+      }
+
+      const warning = document.getElementById("dreamiesWarning");
+      const giveButton = document.getElementById("giveMissingDreamiesButton");
+
+      warning.innerText =
+        "Bob könyvelése frissítve. A hiányzó " + missingDreamiesAmount +
+        " Dreamies elméletileg megérkezett.";
+
+      giveButton.classList.add("hidden");
+
+      document.getElementById("dreamiesHint").innerText =
+        "Dreamies-egyenleg rendezve. Bob átmenetileg elégedett.";
+
+      completeTask(3);
     }
 
     function showToast(message) {
-      const toast = document.getElementById("lockToast");
-
+      const toast = document.getElementById("toast");
       toast.innerText = message;
       toast.style.display = "block";
 
-      setTimeout(() => {
+      setTimeout(function() {
         toast.style.display = "none";
-      }, 3500);
+      }, 3300);
     }
-
-    function showLockToast() {
-      showToast("Nana, nézzük csak meg mind a 4 képet egy titkos opció feloldásához. 😼");
-    }
-
-    window.addEventListener("scroll", function() {
-      const afterGallerySection = document.getElementById("afterGallerySection");
-      const gallerySection = document.getElementById("gallerySection");
-
-      const allImagesViewed = viewedImages.size === totalImages;
-      const tryingToPassGallery = window.scrollY + window.innerHeight * 0.45 > afterGallerySection.offsetTop;
-
-      if (!allImagesViewed && tryingToPassGallery && !lockCooldown) {
-        lockCooldown = true;
-
-        gallerySection.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-
-        showLockToast();
-
-        setTimeout(() => {
-          lockCooldown = false;
-        }, 1400);
-      }
-    });
-
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "Escape") {
-        closeLightbox();
-      }
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-      const secretVideo = document.getElementById("secretVideo");
-      const music = document.getElementById("music");
-      const afterGallerySection = document.getElementById("afterGallerySection");
-
-      secretVideo.addEventListener("ended", function() {
-        stopStopChaos();
-      });
-
-      music.addEventListener("ended", function() {
-        unlockNextPage();
-      });
-
-      const musicObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting && !musicReminderStarted && !musicStarted && !musicCompleted) {
-            musicReminderStarted = true;
-
-            setTimeout(function() {
-              if (!musicStarted && !musicCompleted) {
-                showToast("Nana. Az Amazing booby trap meghallgatása kötelező a továbblépéshez. Bob figyel. 😼");
-              }
-            }, 2000);
-          }
-        });
-      }, {
-        threshold: 0.45
-      });
-
-      musicObserver.observe(afterGallerySection);
-    });
 
     function createCat() {
       const cat = document.createElement("div");
       cat.className = "cat";
 
-      const emojis = ["🐱", "🐾", "😺", "😼", "💙"];
+      const emojis = ["🐱", "🐾", "😺", "😼", "💼", "📄"];
       cat.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
       cat.style.left = Math.random() * 100 + "vw";
@@ -880,12 +663,12 @@
 
       document.body.appendChild(cat);
 
-      setTimeout(() => {
+      setTimeout(function() {
         cat.remove();
       }, 7000);
     }
 
-    setInterval(createCat, 600);
+    setInterval(createCat, 650);
   </script>
 
 </body>
