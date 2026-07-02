@@ -38,7 +38,7 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.76);
       padding: 32px;
       border-radius: 28px;
       box-shadow: 0 12px 35px rgba(0,0,0,0.22);
@@ -93,32 +93,44 @@
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 22px;
       margin-top: 30px;
       width: 100%;
-      max-width: 850px;
+      max-width: 950px;
     }
 
     .photo-box {
-      background: rgba(255,255,255,0.72);
-      border-radius: 22px;
-      padding: 20px;
-      min-height: 170px;
+      background: rgba(255,255,255,0.76);
+      border-radius: 24px;
+      padding: 12px;
+      min-height: 260px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 18px;
-      color: #102a43;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      overflow: hidden;
     }
 
     .photo-box img {
       width: 100%;
-      height: 100%;
-      max-height: 260px;
+      height: 280px;
       object-fit: cover;
       border-radius: 18px;
+      display: block;
+    }
+
+    .caption {
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #0b2545;
+    }
+
+    .gallery-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .cat {
@@ -153,7 +165,7 @@
 
 <body>
 
-  <div class="corner-brand">Bobert ™ ( vibe coding purpose only )</div>
+  <div class="corner-brand">Bobert ™</div>
 
   <div class="section">
     <div class="card">
@@ -184,7 +196,7 @@
       <p><strong>Név:</strong> Bob</p>
       <p><strong>Becenév:</strong> Booby</p>
       <p><strong>Tulajdonos:</strong> Schndr</p>
-      <p><strong>Foglalkozás:</strong> főállású cukiság és lakásmenedzser</p>
+      <p><strong>Foglalkozás:</strong> főállású cukiság és Dreamies minőségellenőr</p>
       <p><strong>Specialitás:</strong> emberek manipulálása nézéssel</p>
       <p><strong>Rang:</strong> királyi macska</p>
     </div>
@@ -194,14 +206,39 @@
     <h2>Booby galéria</h2>
 
     <p>
-      Ide jönnek majd Bob legjobb képei.
+      Néhány történelmi jelentőségű felvétel Bobról
     </p>
 
     <div class="gallery">
-      <div class="photo-box">Bob kép 1 🐱</div>
-      <div class="photo-box">Booby kép 2 😼</div>
-      <div class="photo-box">Bob kép 3 🐾</div>
-      <div class="photo-box">Booby kép 4 ❤️</div>
+
+      <div class="gallery-item">
+        <div class="photo-box">
+          <img src="images/bob1.jpg" alt="Bob kép 1">
+        </div>
+        <div class="caption">Bob, amikor tudja, hogy ő a főnök</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-box">
+          <img src="images/bob2.jpg" alt="Bob kép 2">
+        </div>
+        <div class="caption">Booby, a lakás tulajdonosa</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-box">
+          <img src="images/bob3.jpg" alt="Bob kép 3">
+        </div>
+        <div class="caption">Bob, aki semmit nem bán</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="photo-box">
+          <img src="images/bob4.jpg" alt="Bob kép 4">
+        </div>
+        <div class="caption">Booby, teljes királyi nyugalomban</div>
+      </div>
+
     </div>
   </div>
 
@@ -211,8 +248,7 @@
 
       <p>
         Köszönöm, hogy etetsz, szeretsz, elviselsz, simogatsz,
-        és néha még akkor is aranyosnak tartasz, amikor teljesen indokolatlanul
-        3 kilómétert futok a létező összes útvonalon.
+        és néha még akkor is aranyosnak tartasz, amikor teljesen indokolatlanul furán viselkedem.
       </p>
 
       <p>
@@ -220,7 +256,7 @@
         és Bobra is. Főleg Bobra. De rád is. ❤️
       </p>
 
-      <button onclick="playMusic()">Play Booby music 🎵</button>
+      <button id="musicButton" onclick="toggleMusic()">Play Booby music 🎵</button>
     </div>
   </div>
 
@@ -229,7 +265,7 @@
   </footer>
 
   <audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
+    <source src="music/booby.mp3" type="audio/mpeg">
   </audio>
 
   <script>
@@ -246,9 +282,17 @@
       }
     }
 
-    function playMusic() {
+    function toggleMusic() {
       const music = document.getElementById("music");
-      music.play();
+      const button = document.getElementById("musicButton");
+
+      if (music.paused) {
+        music.play();
+        button.innerText = "Pause Booby music ⏸️";
+      } else {
+        music.pause();
+        button.innerText = "Play Booby music 🎵";
+      }
     }
 
     function createCat() {
