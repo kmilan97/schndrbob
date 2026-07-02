@@ -136,7 +136,7 @@
 
     .runaway-area {
       position: relative;
-      height: 170px;
+      height: 190px;
       margin-top: 18px;
       border-radius: 24px;
       background: rgba(184, 231, 255, 0.45);
@@ -147,7 +147,7 @@
     #yesButton {
       position: absolute;
       left: 40%;
-      top: 55px;
+      top: 65px;
       background: #0b2545;
     }
 
@@ -173,7 +173,7 @@
       box-shadow: 0 8px 22px rgba(0,0,0,0.16);
       border: 4px solid transparent;
       transition: 0.2s;
-      min-height: 170px;
+      min-height: 190px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -191,15 +191,10 @@
 
     .captcha-tile img {
       width: 100%;
-      height: 135px;
+      height: 145px;
       object-fit: cover;
       border-radius: 16px;
       display: block;
-    }
-
-    .fake-animal {
-      font-size: 58px;
-      margin-bottom: 10px;
     }
 
     .tile-label {
@@ -346,33 +341,33 @@
         <div class="captcha-grid">
 
           <div class="captcha-tile" data-is-bob="true" onclick="toggleCaptchaTile(this)">
-            <img src="bob9.jpg" alt="Bob captcha 1">
-            <div class="tile-label">Gyanúsan Bob</div>
+            <img src="bob7.jpg" alt="Bob captcha 1">
+            <div class="tile-label">LinkedIn-kompatibilis Bob</div>
           </div>
 
           <div class="captcha-tile" data-is-bob="false" onclick="toggleCaptchaTile(this)">
-            <div class="fake-animal">🐶</div>
-            <div class="tile-label">Nem Bob. Hanem kutya. Elfogadhatatlan.</div>
+            <img src="bob31.jpg" alt="Róka captcha">
+            <div class="tile-label">Róka. Vörös, de nem Bob.</div>
           </div>
 
           <div class="captcha-tile" data-is-bob="true" onclick="toggleCaptchaTile(this)">
-            <img src="bob10.jpg" alt="Bob captcha 2">
-            <div class="tile-label">Modellgyanús Bob</div>
+            <img src="bob13.jpg" alt="Bob captcha 2">
+            <div class="tile-label">Erősen Bob-gyanús jelölt</div>
           </div>
 
           <div class="captcha-tile" data-is-bob="false" onclick="toggleCaptchaTile(this)">
-            <div class="fake-animal">🦊</div>
-            <div class="tile-label">Vörös, de nem Bob</div>
+            <img src="bob30.jpg" alt="Random vörös macska captcha">
+            <div class="tile-label">Random vörös macska. Nem Bob.</div>
           </div>
 
           <div class="captcha-tile" data-is-bob="true" onclick="toggleCaptchaTile(this)">
-            <img src="bob1.jpg" alt="Bob captcha 3">
-            <div class="tile-label">AI elleni Bob</div>
+            <img src="bob14.jpg" alt="Bob captcha 3">
+            <div class="tile-label">Profilképgyanús Bob</div>
           </div>
 
           <div class="captcha-tile" data-is-bob="true" onclick="toggleCaptchaTile(this)">
-            <img src="bob4.jpg" alt="Bob captcha 4">
-            <div class="tile-label">Királyi nyugalomban Bob</div>
+            <img src="bob6.jpg" alt="Bob captcha 4">
+            <div class="tile-label">OnlyPaws Bob</div>
           </div>
 
         </div>
@@ -391,7 +386,7 @@
 
         <p>
           Add meg, mennyi Dreamies-t kapott ma Bob.
-          A rendszer csak akkor enged tovább, ha a napi mennyiség legalább 10.
+          A rendszer majd eldönti, hogy ez Bob szerint elfogadható-e.
         </p>
 
         <input
@@ -399,7 +394,7 @@
           class="dreamies-input"
           type="number"
           min="0"
-          placeholder="pl. 10"
+          placeholder="mai Dreamies mennyiség"
         />
 
         <br>
@@ -448,6 +443,9 @@
     let yesButtonCatchable = false;
     let missingDreamiesAmount = 0;
 
+    const requiredRunawayAttempts = 9;
+    const secretDreamiesQuota = 100;
+
     function updateProgress() {
       const progress = document.getElementById("progress");
       progress.innerText = "Teljesített feladatok: " + completedTasks + " / 3";
@@ -492,16 +490,31 @@
 
       runawayAttempts++;
       moveYesButton();
+      updateRunawayHint();
+    }
 
-      if (runawayAttempts === 3) {
-        document.getElementById("runawayHint").innerText =
-          "Hahaha, most te kergetsz, mint szoktam a játékomat.";
+    function updateRunawayHint() {
+      const hint = document.getElementById("runawayHint");
+
+      if (runawayAttempts === 2) {
+        hint.innerText = "Nem ilyen könnyű bejutni Bob szakmai profiljába.";
       }
 
-      if (runawayAttempts >= 5) {
+      if (runawayAttempts === 4) {
+        hint.innerText = "Hahaha, most te kergetsz, mint szoktam a játékomat.";
+      }
+
+      if (runawayAttempts === 6) {
+        hint.innerText = "Bob továbbra is gyorsabb nálad. Ez kellemetlen, de várható volt.";
+      }
+
+      if (runawayAttempts === 8) {
+        hint.innerText = "Már majdnem. Bob kezd unatkozni, ezért talán ad egy esélyt.";
+      }
+
+      if (runawayAttempts >= requiredRunawayAttempts) {
         yesButtonCatchable = true;
-        document.getElementById("runawayHint").innerText =
-          "Jó, Bob megsajnált. Most már megpróbálhatod elkapni. Én gyorsabban elkapom.";
+        hint.innerText = "Jó, Bob megsajnált. Most már megpróbálhatod elkapni. Én gyorsabban elkaptam.";
       }
     }
 
@@ -527,16 +540,7 @@
       if (!yesButtonCatchable) {
         runawayAttempts++;
         moveYesButton();
-
-        if (runawayAttempts >= 5) {
-          yesButtonCatchable = true;
-          document.getElementById("runawayHint").innerText =
-            "Jó, Bob megsajnált. Most már megpróbálhatod elkapni. Én gyorsabban elkapom.";
-        } else {
-          document.getElementById("runawayHint").innerText =
-            "Nem ilyen könnyű bejutni Bob szakmai profiljába.";
-        }
-
+        updateRunawayHint();
         return;
       }
 
@@ -600,15 +604,15 @@
         return;
       }
 
-      if (value >= 10) {
+      if (value >= secretDreamiesQuota) {
         warning.style.display = "block";
-        warning.innerText = "Elfogadva. Bob ma legalább 10 Dreamies-t kapott. Ez már tárgyalási alap.";
+        warning.innerText = "Elfogadva. Bob szerint ez már közelít az alapvető emberi minimumhoz.";
         giveButton.classList.add("hidden");
         completeTask(3);
         return;
       }
 
-      missingDreamiesAmount = 10 - value;
+      missingDreamiesAmount = secretDreamiesQuota - value;
 
       warning.style.display = "block";
       warning.innerText =
