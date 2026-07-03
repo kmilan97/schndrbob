@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Bob Tattoo Ideas 🐱🖋️</title>
 
   <style>
@@ -12,6 +13,7 @@
       background: linear-gradient(135deg, #0b2545, #2f80ed, #b8e7ff);
       color: #102a43;
       text-align: center;
+      overflow-x: hidden;
     }
 
     .corner-brand {
@@ -76,7 +78,7 @@
     }
 
     .card {
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       border-radius: 28px;
       overflow: hidden;
       box-shadow: 0 14px 36px rgba(0,0,0,0.22);
@@ -88,12 +90,20 @@
       transform: translateY(-6px) scale(1.01);
     }
 
+    .image-wrap {
+      background: #050505;
+      height: 390px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
     .card img {
       width: 100%;
-      height: 300px;
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain;
       display: block;
-      background: #dfefff;
     }
 
     .card-content {
@@ -114,6 +124,18 @@
       border-radius: 999px;
       background: rgba(184, 231, 255, 0.75);
       color: #0b2545;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .danger-level {
+      display: inline-block;
+      margin-top: 10px;
+      margin-left: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(11, 37, 69, 0.92);
+      color: white;
       font-weight: bold;
       font-size: 14px;
     }
@@ -148,6 +170,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="corner-brand">Bobert ™ tattoo archive</div>
@@ -155,91 +178,159 @@
   <div class="container">
     <div class="hero">
       <h1>Bob tetkóötletek 🐱🖋️</h1>
+
       <p>
-        Gratulálok. A 10/10-es értékeléseddel feloldottad Bob elit jutalmát:
-        <strong>6 rendkívül komoly, teljesen vállalható és abszolút nem túlzás Bob-tematikájú tetkóötletet.</strong>
+        Gratulálok. A 10/10-es értékeléssel feloldottad Bob titkos tetkóarchívumát.
+        Ez nem egy sima inspirációs oldal. Ez egy vizuális figyelmeztetés arra,
+        hogy Bob hatása már bőr alá ment.
       </p>
+
       <p>
-        Ezek inkább inspirációk, mint kész minták — de a vibe nagyon erős.
+        Az alábbi minták nem feltétlenül józan döntések, de Bob szerint a józan döntések túlértékeltek.
       </p>
 
       <div class="elite-note">
-        Csak a 10/10-esek láthatják ezt az oldalt. Bob nem viccelt.
+        Csak 10/10-es látogatóknak. Bob nem osztogat tetkóötleteket akárkinek.
       </div>
     </div>
 
     <div class="grid">
+
       <div class="card">
-        <img src="bob19.jpg" alt="Bob tattoo idea 1">
+        <div class="image-wrap">
+          <img src="bob19.jpg" alt="Laser Bob tattoo idea">
+        </div>
+
         <div class="card-content">
-          <div class="tattoo-title">1. The Distinguished Bob</div>
+          <div class="tattoo-title">1. Laser Booby</div>
+
           <p>
-            Egy elegáns, magabiztos Bob-portré minimalista vonalakkal.
-            Az a fajta minta, ami egyszerre cuki és úgy néz ki, mintha ő lenne a család ügyvédje.
+            Ez a minta Bob végső támadóformája. Akkor ajánlott, ha szeretnéd a világ tudtára adni,
+            hogy a macska nem kérdez, csak lézerrel megoldja.
           </p>
-          <div class="placement">Ajánlott hely: alkar / vádli</div>
+
+          <p>
+            Üzenete egyszerű: Dreamies nincs, következmények vannak.
+          </p>
+
+          <div class="placement">Ajánlott hely: alkar</div>
+          <div class="danger-level">Veszélyszint: kritikus</div>
         </div>
       </div>
 
       <div class="card">
-        <img src="bob20.jpg" alt="Bob tattoo idea 2">
+        <div class="image-wrap">
+          <img src="bob20.jpg" alt="Creation of Bob tattoo idea">
+        </div>
+
         <div class="card-content">
-          <div class="tattoo-title">2. Booby the Chaos Saint</div>
+          <div class="tattoo-title">2. Bob teremtése</div>
+
           <p>
-            Egy kissé misztikusabb Bob-változat, mint egy macskás védőszent,
-            aki figyel rád, de közben bármikor lelök valamit az asztalról.
+            Michelangelo, csak több macskával és kevesebb emberi méltósággal.
+            Ez a tetkó azt mondja: lehet, hogy az ember teremtette a civilizációt,
+            de Bob teremtette a napi etetési rendet.
           </p>
-          <div class="placement">Ajánlott hely: felkar / lapocka</div>
+
+          <p>
+            Művészi, drámai, és teljesen indokolatlanul komoly.
+          </p>
+
+          <div class="placement">Ajánlott hely: comb / felkar</div>
+          <div class="danger-level">Vibe: múzeumi káosz</div>
         </div>
       </div>
 
       <div class="card">
-        <img src="bob21.jpg" alt="Bob tattoo idea 3">
+        <div class="image-wrap">
+          <img src="bob21.jpg" alt="Scratch Bob tattoo idea">
+        </div>
+
         <div class="card-content">
-          <div class="tattoo-title">3. The Tiny Tyrant</div>
+          <div class="tattoo-title">3. Kapaszkodó kis démon</div>
+
           <p>
-            Egy apróbb, játékos Bob-minta, ami tökéletes mikro tetkónak.
-            Olyan kis uralkodói jelenlét, amitől mindenki tudja, hogy itt valójában ő a főnök.
+            Ez a minta azoknak való, akik tudják, milyen amikor egy macska már félig leesett,
+            de büszkeségből még mindig úgy tesz, mintha ez része lett volna a tervnek.
           </p>
-          <div class="placement">Ajánlott hely: csukló / boka</div>
+
+          <p>
+            Egyszerre cuki, idegesítő és enyhén fenyegető. Tehát Bob-kompatibilis.
+          </p>
+
+          <div class="placement">Ajánlott hely: váll / lapocka</div>
+          <div class="danger-level">Karomfaktor: magas</div>
         </div>
       </div>
 
       <div class="card">
-        <img src="bob22.jpg" alt="Bob tattoo idea 4">
+        <div class="image-wrap">
+          <img src="bob22.jpg" alt="Laser Bob tattoo idea alternate">
+        </div>
+
         <div class="card-content">
-          <div class="tattoo-title">4. Bob the Bed Usurper</div>
+          <div class="tattoo-title">4. Laser Booby, rendezői változat</div>
+
           <p>
-            Tökéletes azoknak, akik már beletörődtek, hogy az ágy jogilag és érzelmileg is Bob tulajdona.
-            Egy kényelmesen elterülő legenda.
+            Ugyanaz az energia, csak még erősebben. Ez már nem kérés, nem javaslat,
+            hanem hivatalos Bob-határozat.
           </p>
-          <div class="placement">Ajánlott hely: comb / borda</div>
+
+          <p>
+            Akkor jó választás, ha az első lézeres verzió után úgy érezted,
+            hogy kell még egy kis extra pusztítás.
+          </p>
+
+          <div class="placement">Ajánlott hely: másik alkar</div>
+          <div class="danger-level">Indokoltság: vitatható</div>
         </div>
       </div>
 
       <div class="card">
-        <img src="bob23.jpg" alt="Bob tattoo idea 5">
+        <div class="image-wrap">
+          <img src="bob23.jpg" alt="Tiny cat touch tattoo idea">
+        </div>
+
         <div class="card-content">
-          <div class="tattoo-title">5. Dreamies Oracle</div>
+          <div class="tattoo-title">5. A szent boop</div>
+
           <p>
-            Ez a verzió olyan, mintha Bob épp a következő Dreamies-adag sorsáról döntene.
-            Kifejezetten jó inspiráció egy szöveges vagy kis szimbólumos kiegészítéssel.
+            Egy apró macska és az emberi kéz találkozása. Olyan, mintha egy reneszánsz festmény
+            és egy macskás mém összeveszett volna, majd tetkóként békültek ki.
           </p>
-          <div class="placement">Ajánlott hely: alkar belső része</div>
+
+          <p>
+            Finomabb, kisebb, de közben nagyon erős: Bob néha csak egy ujjnyira van az isteni státusztól.
+          </p>
+
+          <div class="placement">Ajánlott hely: kar / boka / csukló</div>
+          <div class="danger-level">Cukiság: alattomos</div>
         </div>
       </div>
 
       <div class="card">
-        <img src="bob24.jpg" alt="Bob tattoo idea 6">
+        <div class="image-wrap">
+          <img src="bob24.jpg" alt="Held cat tattoo idea">
+        </div>
+
         <div class="card-content">
-          <div class="tattoo-title">6. Ultimate Booby Energy</div>
+          <div class="tattoo-title">6. Elfogott Booby</div>
+
           <p>
-            A legerősebb végső forma. Ez már nem egyszerűen egy macska-tetkóötlet,
-            hanem egy életfilozófia: önbizalom, vörös szőr, csapvíz és kontroll.
+            Ez a minta azt a ritka pillanatot ábrázolja, amikor Bob fizikailag ugyan kézben van,
+            de mentálisan továbbra is ő irányítja a helyzetet.
           </p>
-          <div class="placement">Ajánlott hely: felkar / mellkas / bármi, ha elég bátor vagy</div>
+
+          <p>
+            Tökéletes azoknak, akik értik, hogy egy macskát meg lehet fogni,
+            de legyőzni soha.
+          </p>
+
+          <div class="placement">Ajánlott hely: felkar / vádli</div>
+          <div class="danger-level">Kontroll: látszólagos</div>
         </div>
       </div>
+
     </div>
 
     <div class="back-links">
@@ -249,7 +340,7 @@
   </div>
 
   <footer>
-    Bob tattoo concept vault • Approved only for elite 10/10 visitors
+    Bob tattoo concept vault · Approved only for elite 10/10 visitors
   </footer>
 
 </body>
