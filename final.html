@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Bob Final Ceremony 🐱👑</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #b8e7ff, #2f80ed, #0b2545);
+      color: #102a43;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .corner-brand {
+      position: fixed;
+      top: 14px;
+      left: 16px;
+      font-size: 13px;
+      font-weight: bold;
+      color: white;
+      opacity: 0.85;
+      z-index: 1000;
+      letter-spacing: 0.5px;
+    }
+
+    .section {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.86);
+      padding: 34px;
+      border-radius: 32px;
+      box-shadow: 0 18px 46px rgba(0,0,0,0.32);
+      backdrop-filter: blur(9px);
+      max-width: 920px;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 5;
+    }
+
+    h1 {
+      font-size: 44px;
+      color: #0b2545;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #0b2545;
+      margin-top: 10px;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 1.6;
+      color: #102a43;
+    }
+
+    .intro-text {
+      max-width: 760px;
+      margin: 0 auto 18px;
+    }
+
+    .contract-box {
+      margin-top: 30px;
+      padding: 26px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+      text-align: left;
+    }
+
+    .contract-title {
+      text-align: center;
+      font-size: 26px;
+      color: #0b2545;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .contract-list {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #102a43;
+      padding-left: 24px;
+    }
+
+    .checkbox-row {
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(184, 231, 255, 0.45);
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0b2545;
+    }
+
+    .checkbox-row input {
+      transform: scale(1.3);
+      margin-right: 10px;
+    }
+
+    button, .main-link {
+      margin-top: 18px;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 999px;
+      background: #0b2545;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    button:hover, .main-link:hover {
+      transform: scale(1.06);
+      background: #133b63;
+    }
+
+    .yes-button {
+      background: #0b7a3b;
+      font-size: 20px;
+    }
+
+    .yes-button:hover {
+      background: #089447;
+    }
+
+    .no-button {
+      background: #9b1c31;
+      margin-left: 12px;
+      position: relative;
+    }
+
+    .no-button:hover {
+      background: #c9183a;
+    }
+
+    .question-box {
+      margin-top: 32px;
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .loading-box {
+      margin-top: 30px;
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(11, 37, 69, 0.95);
+      color: white;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.24);
+    }
+
+    .loading-line {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 12px 0;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: 0.35s;
+    }
+
+    .loading-line.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ceremony-box {
+      margin-top: 34px;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 14px 38px rgba(0,0,0,0.24);
+    }
+
+    .dance-video {
+      width: 100%;
+      max-width: 620px;
+      border-radius: 26px;
+      background: #000;
+      box-shadow: 0 14px 38px rgba(0,0,0,0.3);
+      margin-top: 20px;
+    }
+
+    .dance-caption {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2545;
+      margin-top: 22px;
+      font-style: italic;
+    }
+
+    .stamp {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 16px 24px;
+      border: 5px solid #b00020;
+      color: #b00020;
+      font-size: 24px;
+      font-weight: 900;
+      border-radius: 18px;
+      transform: rotate(-6deg);
+      animation: stampPop 0.8s ease-out;
+      background: rgba(255,255,255,0.85);
+    }
+
+    @keyframes stampPop {
+      0% {
+        transform: scale(3) rotate(-20deg);
+        opacity: 0;
+      }
+
+      70% {
+        transform: scale(0.9) rotate(-6deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1) rotate(-6deg);
+        opacity: 1;
+      }
+    }
+
+    .slave-id-card {
+      margin: 28px auto 0;
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(184, 231, 255, 0.55);
+      color: #0b2545;
+      max-width: 620px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.16);
+      font-weight: bold;
+    }
+
+    .slave-id-card p {
+      margin: 8px auto;
+      font-size: 18px;
+    }
+
+    .rating-box {
+      margin-top: 34px;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 14px 38px rgba(0,0,0,0.22);
+    }
+
+    .rating-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .rating-button {
+      width: 52px;
+      height: 52px;
+      padding: 0;
+      font-size: 18px;
+      background: #0b2545;
+    }
+
+    .rating-button.selected {
+      background: #0b7a3b;
+      transform: scale(1.14);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+    }
+
+    .rating-button.low-rating:hover {
+      transform: translateY(-12px) rotate(-6deg);
+      background: #9b1c31;
+    }
+
+    .rating-hint {
+      margin-top: 18px;
+      font-weight: bold;
+      color: #0b2545;
+      min-height: 30px;
+    }
+
+    .submit-button {
+      background: #0b7a3b;
+      margin-top: 24px;
+    }
+
+    .submit-button:hover {
+      background: #089447;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      background: #0b2545;
+      color: white;
+      padding: 16px 22px;
+      border-radius: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      z-index: 3000;
+      font-size: 17px;
+      font-weight: bold;
+      max-width: 90%;
+      display: none;
+    }
+
+    .falling-item {
+      position: fixed;
+      top: -40px;
+      font-size: 26px;
+      animation: fall 6s linear forwards;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(112vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    footer {
+      color: white;
+      font-weight: bold;
+      padding: 40px 20px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="corner-brand">Bobert ™ final ceremony</div>
+
+  <div id="toast" class="toast"></div>
+
+  <div class="section">
+    <div class="card">
+
+      <h1>Bob végső ceremóniája 👑</h1>
+
+      <p class="intro-text">
+        Most, hogy megismerted minden tulajdonságomat, igényemet,
+        szakmai múltamat, Dreamies-elvárásaimat és általános uralkodói természetemet,
+        Bob hivatalosan felteszi a végső kérdést.
+      </p>
+
+      <div class="contract-box">
+        <div class="contract-title">SZOLGASÁGI SZERZŐDÉS</div>
+
+        <p>
+          Alulírott látogató kijelentem, hogy az alábbi Bob által előírt feltételeket
+          megismertem, megkérdőjelezni nem kívánom, és belső ellenállásomat hivatalosan feladtam.
+        </p>
+
+        <ul class="contract-list">
+          <li>Bobot minden körülmények között felsőbbrendű lényként kezelem.</li>
+          <li>A Dreamies-kötelezettségeimet nem vitatom.</li>
+          <li>A csapvízhez való hozzáférést biztosítom.</li>
+          <li>Az ágy tulajdonjogáról szükség esetén lemondok.</li>
+          <li>Bob furcsa viselkedését nem kérdőjelezem meg, csak dokumentálom.</li>
+          <li>A “Nem” válasz lehetőségét kizárólag dekorációs elemként értelmezem.</li>
+        </ul>
+
+        <div class="checkbox-row">
+          <label>
+            <input id="contractCheckbox" type="checkbox" onchange="contractChanged()">
+            Elolvastam, elfogadom, és természetesen nincs választásom.
+          </label>
+        </div>
+      </div>
+
+      <div id="questionBox" class="question-box">
+        <h2>Lennél-e örökre Bob szolgája?</h2>
+
+        <p>
+          Figyelem: a döntés végleges, Bob már előre csalódott lenne az ellenkező válaszban.
+        </p>
+
+        <button class="yes-button" onclick="acceptServitude()">
+          Igen, Bob szolgája leszek
+        </button>
+
+        <button id="noButton" class="no-button" onclick="rejectServitude()">
+          Nem
+        </button>
+
+        <div id="noHint" class="rating-hint">
+          A rendszer készen áll Bob végső döntésének feldolgozására.
+        </div>
+      </div>
+
+      <div id="loadingBox" class="loading-box hidden">
+        <h2 style="color:white;">Bob döntésének feldolgozása...</h2>
+
+        <div id="loadingLine1" class="loading-line">Dreamies-egyenleg ellenőrzése...</div>
+        <div id="loadingLine2" class="loading-line">Szolgai hajlandóság mérése...</div>
+        <div id="loadingLine3" class="loading-line">Ágytulajdonjog átruházása...</div>
+        <div id="loadingLine4" class="loading-line">Booby dance protocol aktiválása...</div>
+      </div>
+
+      <div id="ceremonyBox" class="ceremony-box hidden">
+        <h2>Bob elfogadta az ajánlatot 🐱</h2>
+
+        <div class="stamp">
+          APPROVED BY BOB
+        </div>
+
+        <p class="dance-caption">
+          And then Booby danced before his slave with all his might.
+        </p>
+
+        <video id="danceVideo" class="dance-video" controls playsinline loop preload="metadata">
+          <source src="booby-dance.mp4" type="video/mp4">
+          A böngésződ nem támogatja ezt a videót.
+        </video>
+
+        <br>
+
+        <button onclick="startDanceProtocol()">
+          Booby dance protocol indítása 🎵
+        </button>
+
+        <div class="slave-id-card">
+          <h2>Szolgaazonosító létrehozva</h2>
+          <p id="slaveId">Szolgaazonosító: generálás alatt...</p>
+          <p>Státusz: elfogadva</p>
+          <p>Felettes: Bob</p>
+          <p>Juttatások: semmi</p>
+          <p>Kötelezettségek: minden</p>
+        </div>
+      </div>
+
+      <div id="ratingBox" class="rating-box hidden">
+        <h2>Értékeld Bob szolgává avatási folyamatát</h2>
+
+        <p>
+          Válassz egy pontszámot 1 és 10 között. Bob objektív, de érzékeny.
+        </p>
+
+        <form
+          id="ratingForm"
+          action="https://formspree.io/f/FORM_IDE_JON"
+          method="POST"
+          onsubmit="submitRating(event)"
+        >
+          <input type="hidden" id="ratingInput" name="rating" value="">
+          <input type="hidden" id="rankInput" name="rank" value="">
+          <input type="hidden" id="slaveIdInput" name="slave_id" value="">
+          <input type="hidden" name="page" value="Bob final ceremony">
+          <input type="hidden" id="timestampInput" name="timestamp" value="">
+
+          <div class="rating-buttons">
+            <button type="button" class="rating-button low-rating" onclick="selectRating(1)" onmouseenter="ratingHover(1)">1</button>
+            <button type="button" class="rating-button low-rating" onclick="selectRating(2)" onmouseenter="ratingHover(2)">2</button>
+            <button type="button" class="rating-button low-rating" onclick="selectRating(3)" onmouseenter="ratingHover(3)">3</button>
+            <button type="button" class="rating-button low-rating" onclick="selectRating(4)" onmouseenter="ratingHover(4)">4</button>
+            <button type="button" class="rating-button low-rating" onclick="selectRating(5)" onmouseenter="ratingHover(5)">5</button>
+            <button type="button" class="rating-button low-rating" onclick="selectRating(6)" onmouseenter="ratingHover(6)">6</button>
+            <button type="button" class="rating-button" onclick="selectRating(7)" onmouseenter="ratingHover(7)">7</button>
+            <button type="button" class="rating-button" onclick="selectRating(8)" onmouseenter="ratingHover(8)">8</button>
+            <button type="button" class="rating-button" onclick="selectRating(9)" onmouseenter="ratingHover(9)">9</button>
+            <button type="button" class="rating-button" onclick="selectRating(10)" onmouseenter="ratingHover(10)">10</button>
+          </div>
+
+          <div id="ratingHint" class="rating-hint">
+            Bob szerint a 10 technikailag a legstabilabb választás.
+          </div>
+
+          <button class="submit-button" type="submit">
+            Értékelés elküldése Bob HR-osztályának
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    Directed by Bob · Produced by Dreamies · Slave onboarding by Bobert ™
+  </footer>
+
+  <audio id="victoryMusic" preload="metadata">
+    <source src="music/booby-victory-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    let contractAccepted = false;
+    let noClicks = 0;
+    let selectedRating = null;
+    let generatedSlaveId = "";
+
+    function contractChanged() {
+      contractAccepted = document.getElementById("contractCheckbox").checked;
+
+      if (contractAccepted) {
+        showToast("Szerződés elfogadva. Bob jogi csapata elégedett.");
+      }
+    }
+
+    function acceptServitude() {
+      if (!contractAccepted) {
+        showToast("Előbb el kell fogadnod a szerződést. Bob nem dolgozik papír nélkül.");
+        return;
+      }
+
+      document.getElementById("questionBox").classList.add("hidden");
+      document.getElementById("loadingBox").classList.remove("hidden");
+
+      showLoadingSequence();
+    }
+
+    function rejectServitude() {
+      noClicks++;
+
+      const noButton = document.getElementById("noButton");
+      const noHint = document.getElementById("noHint");
+
+      const messages = [
+        "Bob nem érti a választ.",
+        "Bob újraszámolja a döntésedet.",
+        "A Nem opció technikai okokból nem támogatott.",
+        "Ez a válasz nem kompatibilis Bob világképével.",
+        "Bob HR-osztálya elutasította az elutasítást.",
+        "A Nem gomb mostantól belsőleg Igenként kerül feldolgozásra."
+      ];
+
+      noHint.innerText = messages[Math.min(noClicks - 1, messages.length - 1)];
+
+      noButton.style.transform =
+        "scale(" + Math.max(0.55, 1 - noClicks * 0.08) + ") rotate(" + (noClicks * 7) + "deg)";
+
+      if (noClicks >= 6) {
+        noButton.innerText = "Rendben, akkor is igen";
+        noButton.classList.remove("no-button");
+        noButton.classList.add("yes-button");
+        noButton.onclick = acceptServitude;
+      }
+    }
+
+    function showLoadingSequence() {
+      const lines = [
+        "loadingLine1",
+        "loadingLine2",
+        "loadingLine3",
+        "loadingLine4"
+      ];
+
+      lines.forEach(function(lineId, index) {
+        setTimeout(function() {
+          document.getElementById(lineId).classList.add("show");
+        }, 650 * (index + 1));
+      });
+
+      setTimeout(function() {
+        document.getElementById("loadingBox").classList.add("hidden");
+        document.getElementById("ceremonyBox").classList.remove("hidden");
+        document.getElementById("ratingBox").classList.remove("hidden");
+
+        generateSlaveId();
+        startDreamiesRain();
+
+        document.getElementById("ceremonyBox").scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+        showToast("Booby dance protocol feloldva.");
+      }, 3800);
+    }
+
+    function startDanceProtocol() {
+      const video = document.getElementById("danceVideo");
+      const music = document.getElementById("victoryMusic");
+
+      video.play().catch(function() {
+        showToast("A videóhoz kattints rá kézzel a Play gombra. Bob türelmetlen.");
+      });
+
+      music.currentTime = 0;
+
+      const playPromise = music.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(function() {
+            showToast("Booby victory music activated.");
+          })
+          .catch(function() {
+            showToast("A zenéhez kattints még egyszer. A böngésző most bürokratikus.");
+          });
+      }
+    }
+
+    function generateSlaveId() {
+      const number = Math.floor(Math.random() * 9000) + 1000;
+      generatedSlaveId = "BOB-SLAVE-" + number + "-0420";
+
+      document.getElementById("slaveId").innerText =
+        "Szolgaazonosító: " + generatedSlaveId;
+
+      document.getElementById("slaveIdInput").value = generatedSlaveId;
+    }
+
+    function selectRating(rating) {
+      selectedRating = rating;
+
+      const buttons = document.querySelectorAll(".rating-button");
+      buttons.forEach(function(button) {
+        button.classList.remove("selected");
+      });
+
+      buttons[rating - 1].classList.add("selected");
+
+      const rank = getRankForRating(rating);
+
+      document.getElementById("ratingInput").value = rating;
+      document.getElementById("rankInput").value = rank;
+      document.getElementById("timestampInput").value = new Date().toISOString();
+
+      document.getElementById("ratingHint").innerText =
+        "Pontszám: " + rating + "/10 · Rang: " + rank;
+    }
+
+    function ratingHover(rating) {
+      const hint = document.getElementById("ratingHint");
+
+      if (rating <= 3) {
+        hint.innerText = "Bob ezt személyes támadásnak veszi.";
+      } else if (rating <= 6) {
+        hint.innerText = "Bob szerint ez egy bátor, de veszélyes döntés.";
+      } else if (rating <= 8) {
+        hint.innerText = "Elfogadható, de Bob ennél többet várt.";
+      } else if (rating === 9) {
+        hint.innerText = "Majdnem tökéletes. Bob gyanakodva néz.";
+      } else {
+        hint.innerText = "Helyes válasz. Bob jóváhagyta.";
+      }
+    }
+
+    function getRankForRating(rating) {
+      if (rating <= 3) {
+        return "Próbaidős tálfeltöltő";
+      }
+
+      if (rating <= 6) {
+        return "Junior Dreamies asszisztens";
+      }
+
+      if (rating <= 8) {
+        return "Senior simogatási koordinátor";
+      }
+
+      if (rating === 9) {
+        return "Executive Booby Support Specialist";
+      }
+
+      return "Örökös főszolga";
+    }
+
+    function submitRating(event) {
+      if (!selectedRating) {
+        event.preventDefault();
+        showToast("Előbb válassz pontszámot. Bob adminisztrációja precíz.");
+        return;
+      }
+
+      const form = document.getElementById("ratingForm");
+
+      if (form.action.includes("FORM_IDE_JON")) {
+        event.preventDefault();
+        showToast("Az értékelés működéséhez majd be kell tenni a Formspree endpointot.");
+        return;
+      }
+
+      showToast("Értékelés elküldve Bob HR-osztályának.");
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.innerText = message;
+      toast.style.display = "block";
+
+      setTimeout(function() {
+        toast.style.display = "none";
+      }, 3600);
+    }
+
+    function createFallingItem() {
+      const item = document.createElement("div");
+      item.className = "falling-item";
+
+      const items = ["🐱", "🐾", "🍬", "👑", "💙", "DREAMIES"];
+      item.innerText = items[Math.floor(Math.random() * items.length)];
+
+      item.style.left = Math.random() * 100 + "vw";
+      item.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+      document.body.appendChild(item);
+
+      setTimeout(function() {
+        item.remove();
+      }, 7000);
+    }
+
+    function startDreamiesRain() {
+      setInterval(createFallingItem, 450);
+    }
+  </script>
+
+</body>
+</html>
