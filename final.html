@@ -453,14 +453,14 @@
           And then Booby danced before his slave with all his might.
         </p>
 
-        <video id="danceVideo" class="dance-video" controls playsinline loop preload="metadata">
+        <video id="danceVideo" class="dance-video" controls playsinline loop muted preload="metadata">
           <source src="booby-dance.mp4" type="video/mp4">
           A böngésződ nem támogatja ezt a videót.
         </video>
 
         <br>
 
-        <button onclick="startDanceProtocol()">
+        <button id="danceProtocolButton" onclick="toggleDanceProtocol()">
           Booby dance protocol indítása 🎵
         </button>
 
@@ -539,6 +539,7 @@
     let selectedRating = null;
     let generatedSlaveId = "";
     let dreamiesRainStarted = false;
+    let danceProtocolPlaying = false;
 
     function contractChanged() {
       contractAccepted = document.getElementById("contractCheckbox").checked;
@@ -619,24 +620,44 @@
       }, 3800);
     }
 
-    function startDanceProtocol() {
+    function toggleDanceProtocol() {
       const video = document.getElementById("danceVideo");
       const music = document.getElementById("victoryMusic");
+      const button = document.getElementById("danceProtocolButton");
 
-      video.play().catch(function() {
-        showToast("A videóhoz kattints rá kézzel a Play gombra. Bob türelmetlen.");
-      });
+      video.muted = true;
+      video.volume = 0;
 
-      music.currentTime = 0;
+      if (danceProtocolPlaying) {
+        video.pause();
+        music.pause();
 
-      const playPromise = music.play();
+        danceProtocolPlaying = false;
+        button.innerText = "Booby dance protocol folytatása 🎵";
 
-      if (playPromise !== undefined) {
-        playPromise
+        showToast("Booby dance protocol szüneteltetve. Bob drámaian megállt.");
+        return;
+      }
+
+      const videoPromise = video.play();
+
+      if (videoPromise !== undefined) {
+        videoPromise.catch(function() {
+          showToast("A videóhoz kattints rá kézzel a Play gombra. Bob türelmetlen.");
+        });
+      }
+
+      const musicPromise = music.play();
+
+      if (musicPromise !== undefined) {
+        musicPromise
           .then(function() {
+            danceProtocolPlaying = true;
+            button.innerText = "Booby dance protocol megállítása ⏸️";
             showToast("Booby victory music activated.");
           })
           .catch(function() {
+            video.pause();
             showToast("A zenéhez kattints még egyszer. A böngésző most bürokratikus.");
           });
       }
@@ -785,6 +806,32 @@
       dreamiesRainStarted = true;
       setInterval(createFallingItem, 450);
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const music = document.getElementById("victoryMusic");
+      const video = document.getElementById("danceVideo");
+      const button = document.getElementById("danceProtocolButton");
+
+      video.muted = true;
+      video.volume = 0;
+
+      video.addEventListener("volumechange", function() {
+        if (!video.muted || video.volume !== 0) {
+          video.muted = true;
+          video.volume = 0;
+        }
+      });
+
+      music.addEventListener("ended", function() {
+        video.pause();
+        video.currentTime = 0;
+
+        danceProtocolPlaying = false;
+        button.innerText = "Booby dance protocol indítása 🎵";
+
+        showToast("Booby victory music véget ért. Bob kifáradt.");
+      });
+    });
   </script>
 
 </body>
